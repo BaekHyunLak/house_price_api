@@ -1,0 +1,6 @@
+.venv/
+artifacts/*.pkl
+data/
+__pycache__/
+.env
+notebooks/
