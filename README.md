@@ -46,6 +46,7 @@ Mô hình Machine Learning (`LinearRegression`) được huấn luyện, lưu tr
 ├── pyproject.toml              # Project dependencies & build configuration (uv)
 ├── requirements.txt            # Exported production dependencies
 └── uv.lock                     # Deterministic dependency lockfile
+```
 
 ## 🚀 Hướng dẫn cài đặt và sử dụng
 
