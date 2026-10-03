@@ -1,9 +1,9 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
-    model_path: str
-    raw_data_path: str
-    processed_data_path: str
+    model_path: str = "artifacts/model.pkl"
+    raw_data_path: str = "data/raw/Housing.csv"
+    processed_data_path: str = "data/processed/housing_cleaned.csv"
 
     model_config = SettingsConfigDict(
         env_file=".env",

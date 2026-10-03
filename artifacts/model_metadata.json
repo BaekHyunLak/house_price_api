@@ -1,0 +1,42 @@
+{
+    "model_name": "LinearRegression",
+    "trained_at": "2026-10-03T10:59:28.025549+00:00",
+    "train_samples": 436,
+    "test_samples": 109,
+    "features": {
+        "numeric": [
+            "area",
+            "bedrooms",
+            "bathrooms",
+            "stories",
+            "parking"
+        ],
+        "categorical": [
+            "mainroad",
+            "guestroom",
+            "basement",
+            "hotwaterheating",
+            "airconditioning",
+            "prefarea",
+            "furnishingstatus"
+        ]
+    },
+    "best_hyperparameters": {},
+    "evaluation_metrics": {
+        "r2_score": 0.6529242642153178,
+        "mae": 970043.403920164,
+        "rmse": 1324506.9600914398
+    },
+    "comparison": {
+        "linear_regression": {
+            "r2_score": 0.6529242642153178,
+            "mae": 970043.403920164,
+            "rmse": 1324506.9600914398
+        },
+        "random_forest_tuned": {
+            "r2_score": 0.6016280072139988,
+            "mae": 1032068.0998736144,
+            "rmse": 1419013.4677722957
+        }
+    }
+}

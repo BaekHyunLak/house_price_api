@@ -4,35 +4,31 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.compose import ColumnTransformer
 
+NUMERIC_FEATURES = ['area', 'bedrooms', 'bathrooms', 'stories', 'parking']
+CATEGORICAL_FEATURES = [
+    'mainroad', 'guestroom', 'basement', 'hotwaterheating', 
+    'airconditioning', 'prefarea', 'furnishingstatus'
+]
 
-def build_lr_pipeline():
-    numeric_features = ['area', 'bedrooms', 'bathrooms', 'stories', 'parking']
-    categorical_features = ['mainroad', 'guestroom', 'basement', 'hotwaterheating', 'airconditioning', 'prefarea', 'furnishingstatus']
-
-    preprocessor = ColumnTransformer(
+def build_preprocessore() -> ColumnTransformer:
+    "Tạo bộ tiền xử lí chuẩn hóa đặc trưng số và mã hóa đặc trưng phân loại"
+    return ColumnTransformer(
         transformers=[
-            ('num', StandardScaler(), numeric_features),
-            ('cat', OneHotEncoder(drop='first', handle_unknown='ignore'), categorical_features)
+            ('num', StandardScaler(), NUMERIC_FEATURES),
+            ('cat', OneHotEncoder(drop='first', handle_unknown='ignore'), CATEGORICAL_FEATURES)
         ]
     )
 
+def build_lr_pipeline():
+
     return Pipeline([
-        ('preprocessor', preprocessor),
+        ('preprocessor', build_preprocessore()),
         ('model', LinearRegression())
     ])
 
 def build_rf_pipeline():
-    numeric_features = ['area', 'bedrooms', 'bathrooms', 'stories', 'parking']
-    categorical_features = ['mainroad', 'guestroom', 'basement', 'hotwaterheating', 'airconditioning', 'prefarea', 'furnishingstatus']
-
-    preprocessor = ColumnTransformer(
-        transformers=[
-            ('num', StandardScaler(), numeric_features),
-            ('cat', OneHotEncoder(drop='first', handle_unknown='ignore'), categorical_features)
-        ]
-    )
 
     return Pipeline([
-        ('preprocessor', preprocessor),
+        ('preprocessor', build_preprocessore()),
         ('model', RandomForestRegressor(random_state=42))
     ])

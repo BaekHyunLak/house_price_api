@@ -330,3 +330,4 @@ uvicorn==0.52.2 \
     --hash=sha256:0b916d247cf5500b320638ea11abf0fed7f348e8e1c7fde53a0e6b6319803512 \
     --hash=sha256:4294500b9c8f7a3ef3e975d9e4be08c3eb76441af449a9e6e10146c6a182ffec
     # via house-price-api
+sqlalchemy

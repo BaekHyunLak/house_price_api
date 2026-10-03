@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Container B: Database
+  db:
+    image: postgres:15-alpine
+    restart: always
+    # Secret Management: Đọc mật khẩu từ file .env thay vì viết cứng vào code
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: house_price_db
+    ports:
+      - "5432:5432"
+    # Thiết lập cơ chế lưu trữ bền vững (Persistence)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Container A: Ứng dụng FastAPI của bạn
+  api:
+    # Yêu cầu Docker tìm và build image từ Dockerfile nằm ngay tại thư mục hiện tại.
+    build: . 
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+    depends_on:
+      - db
+
+# Định nghĩa Volume (Tương tự khái niệm PV/PVC trong Kubernetes)
+volumes:
+  postgres_data:
