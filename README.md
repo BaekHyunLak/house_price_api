@@ -12,6 +12,41 @@ Mô hình Machine Learning (`LinearRegression`) được huấn luyện, lưu tr
 - **Backend Framework:** FastAPI, Pydantic (Data Validation)
 - **Môi trường & Đóng gói:** `uv` (Package Manager), Docker, Docker Compose
 
+## 📁 Project Structure
+
+```text
+.
+├── artifacts/                  # Model artifacts & lineage metadata
+│   ├── model.pkl               # Trained pipeline (Preprocessor + Model)
+│   └── model_metadata.json     # Hyperparameters, evaluation metrics (R2, MAE, RMSE)
+├── data/
+│   ├── raw/Housing.csv         # Raw dataset
+│   └── processed/Housing.csv   # Cleaned dataset
+├── notebooks/
+│   └── eda_and_training.ipynb  # Exploratory Data Analysis & initial experiments
+├── src/                        # Main source code
+│   ├── api/                    # Web API layer (FastAPI)
+│   │   ├── main.py             # App initialization, routing & lifecycle management
+│   │   ├── routes.py           # Additional API endpoints
+│   │   ├── schemas.py          # Pydantic data schemas & request/response validation
+│   │   └── security.py         # API Key authentication guardrail
+│   ├── ml/                     # Machine Learning core
+│   │   ├── pipeline.py         # ColumnTransformer (StandardScaler + OneHotEncoder)
+│   │   └── predictor.py        # Model loading & inference logic
+│   ├── config.py               # Pydantic Settings & environment variables
+│   ├── database.py             # SQLAlchemy engine & session management
+│   ├── models.py               # SQLAlchemy ORM database entities
+│   └── train.py                # Retraining script with GridSearchCV (5-Fold CV)
+├── tests/                      # Automated test suite (Pytest)
+│   ├── conftest.py             # SQLite in-memory DB fixture & dependency overrides
+│   └── test_api.py             # Unit tests for Auth, Validation, DB persistence & History
+├── Dockerfile                  # Containerization specifications
+├── docker-compose.yml          # Multi-container orchestration (FastAPI + PostgreSQL)
+├── run_pipeline.sh             # Automation script: Test -> Build -> Deploy
+├── pyproject.toml              # Project dependencies & build configuration (uv)
+├── requirements.txt            # Exported production dependencies
+└── uv.lock                     # Deterministic dependency lockfile
+
 ## 🚀 Hướng dẫn cài đặt và sử dụng
 
 ### Bước 1: Chuẩn bị cấu hình
@@ -29,3 +64,5 @@ docker build -t house-price-api:v1 .
 ```
 docker run -d -p 8000:8000 --env-file .env --name my-api-server house-price-api:v1
 ```
+
+
